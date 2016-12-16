@@ -1,0 +1,16 @@
+<html ng-app="helloWorld">
+<head>
+<title>Hello World</title>
+<script src='lib/angular.js'></script>
+<script>
+var app = angular.module("helloWorld", []);
+app.controller("helloWorldCtrl", function($scope) {
+$scope.message = "Hello World!";});
+<!-- para não deixar uma variável global pode se usar -->
+<!-- angular.module("helloWorldCtrl").controller("helloWorld", function($scope){ **declara a função* });-->
+</script>
+</head>
+<body ng-controller="helloWorldCtrl">
+{{message}}
+</body>
+</html>

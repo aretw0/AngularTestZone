@@ -1,0 +1,38 @@
+Angularjs notes
+
+**** anotações dos tutorais que tenho visto ***
+
+
+----- Arquitetura vs Design ---
+
+Arquitetura (tecnologia) ex.: Qual Linguagem? Vai usar injeção de dependências? Vai usar Contexto de persistência extendido? Vai usar requisições assíncronas ou vai enviar isso para uma fila?
+
+Design (Beleza) Ex.: Interações entre objetos, camadas e suas formas de relacionamento coeso.
+
+Angular usa Model View C(ontroller), P(resent), V(iew)M(odel), W(hatever)* - Questão filosófica.  
+* KKKK tretas
+
+A importância é a separação de responsabilidades.
+
+-- Eis aqui a composição ---
+
+VIEW (DOM) - HTML ou blocos de HTML (componentes de uma SPA - SINGLE PAGE APLICATTION) obs.: js de leve -inbutido ou não-, talvez animações.
+
+CONTROLLER (SUPORTE DO VIEW) - View e Controller não se conhecem, algum arquivo js que faz a lógica das coisas. ex.: cozinha de um restaurante que só reconhece o pedido e não conhece o cliente mas entrega o prato pronto.
+
+SCOPE (GARÇOM) - Faz ligação, a ponte, a mediação entre o view e controller e rola um caminho duplo de dados do V pro C e vice-versa. ex.: o pedido e o prato.
+
+
+---------------------------------------------------
+Diretivas - são as extensões do HTML que permitem a implementação de novos comportamentos, ou seja, são usadas dentro das tags dos componentes aos quais você quer usar. 
+ps.: O angular percorre seu documento a procura dessas diretivas para compilar-las e executar o comportamento delas.
+
+1. ng-app - Fronteiras do seu aplicativo.
+
+2. ng-controller - Vincula um elemento da VIEW a um CONTROLLER.
+
+3. ng-bind - substitui o elemento por uma expressão (geralmente do $scope), interpolação de expressão, pega uma "coisa" do $scope e exibe.
+
+4. ng-repeat - permite a iteração sobre os itens de uma coleção ou de um objeto.
+
+5. ng-model - vincula uma propriedade ao $scope, entende-se como o inverso do ng-bind, pega uma coisa do VIEW e define no $scope. Obs.: geralmente aplicado aos INPUT's, SELECT's e nos TEXTAREA's.
