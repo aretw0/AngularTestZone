@@ -3,6 +3,8 @@
 <title>Lista Telefonica</title>
 <link rel="stylesheet" type="text/css" href="lib/bootstrap/css/bootstrap.css">
 <style>
+
+/* sobrecarregando classes, definindo novos comportamento */
 	.jumbotron {
 		width: 400px;
 		text-align: center;
@@ -13,25 +15,77 @@
 	.table {
 		margin-top: 20px;
 	}
+	.form-control {
+		margin-bottom: 5px;
+	}
 </style>
 <script src='lib/angular/angular.js'></script>
 <script>
+/* 
+	Definindo modulo da aplicação
+
+	Os colchetes significam o conjunto de módulos que você quer importar, pois o angular permite de uma forma modular fazer a concatenação de componentes com outros módulos.
+
+	Fazendo isso trazemos todos: serviços, diretivas, módulos.
+
+ */
 angular.module("listaTelefonica", []);
+
+// definindo um controller com $scope *utilizado pelo mesmo*
 angular.module("listaTelefonica").controller("listaTelefonicaCtrl", function($scope) {
+//definindo variável
 $scope.app = "Lista Telefonica";
+
+// definindo variável
 $scope.contatos = [
-	{nome: "Pedro", telefone: "999768606"},
+	{nome: "Pedro", telefone: "999763606"},
 	{nome: "Ana", telefone: "999768456"},
 	{nome: "Maria", telefone: "999739606"},]
+
+// definindo função
+$scope.adicionarContato = function(contato) {
+	/* Teste se o nome e telefone (ng-model) estão mesmo no $scope
+	console.log("Nome: " + $scope.nome + "\nTelefone: " + $scope.telefone); */
+
+	/* Usando
+	 $scope.contatos.push({nome: $scope.nome  lendo o scope , telefone: $scope.telefone lendo o scope }); 
+	
+	Insere os valores no final do array, ver conceitos de arrays em JS para mais.
+
+		Esta é uma forma RUIM de passar parâmetro pois está quebrando um mantra precioso.
+		
+		--- MANTRA --
+
+		Devemos EVITAR ao máximo ler o $scope estando dentro do controller.
+		Isso acaba deixando as coisas menos claras e gera problemas no futuro de testes unitários.
+	*/
+
+	/*	Usando	$scope.contatos.push(contato);
+	
+	O twoway databinding vai te fuder, tu precisa lidar com esse ciclo!!
+	
+		Abaixo, opções para isso.			 */
+
+	/* Usar $scope.contatos.push(angular.copy(contato));
+	é uma opção para "desviar" o ciclo do twoway databinding */
+
+	$scope.contatos.push(contato);
+	delete $scope.contato; 
+	// Outra opção para quebrar o ciclo deletando o objeto contato
+
+};
+
+
 });
 </script>
 </head>
 <body ng-controller="listaTelefonicaCtrl">
 <div class="jumbotron">
+	
+	<!--<h3 ng-bind="app"></h3> ou com interpolação de expressão (abaixo) -->
 	<h3>{{app}}</h3>
-	
-	<!--<h3 ng-bind="app"></h3> ou -->
-	
+		
+	<!-- Exemplo de utilização do ng-repeat-->	
 	<table class="table table-striped">
 		<tr>
 			<th>Nome</th>
@@ -44,8 +98,8 @@ $scope.contatos = [
 	</table>
 	
 	<!--
-				ou
-
+	- Outros exemplos:
+				
 	<table class="table table-striped">
 		<tr>
 			<th>Nome</th>
@@ -65,6 +119,22 @@ $scope.contatos = [
 			<td ng-repeat="(key, value) in contato">{{value}}</td>
 		</tr>
 	</table>						-->
+
+	<hr/>
+
+	<!-- O ng-model faz a relação do componente para o $scope e aqui no caso são os valores nome e telefone que automaticamente são usados na expressão abaixo.	-->
+
+	<input class="form-control" type="text" ng-model="contato.nome" placeholder="Nome" />
+	<input class="form-control" type="text" ng-model="contato.telefone" placeholder="Telefone" />
+
+	<!--	{{contato}}
+
+	Esta utilização do ng-bind/interpolação de expressão e o ng-model é um exemplo de DE TWOWAY DATABINDING.	-->
+
+	<!-- Exemplo de utilização do ng-click, a função precisa estar declarada no $scope do controller utilizado-->
+	<button class="btn btn-primary btn-block" ng-click="adicionarContato(contato)">Adicionar Contato</button>
+
+	
 </div>
 </body>
 </html>

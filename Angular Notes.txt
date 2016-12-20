@@ -35,12 +35,18 @@ SCOPE (GARÇOM) - Faz ligação, a ponte, a mediação entre o view e controller e ro
 - Diretivas - são as extensões do HTML que permitem a implementação de novos comportamentos, ou seja, são usadas dentro das tags dos componentes aos quais você quer usar. 
 ps.: O angular percorre seu documento a procura dessas diretivas para compilar-las e executar o comportamento delas.
 
-	1. ng-app - Fronteiras do seu aplicativo.
+	# ng-app - Fronteiras do seu aplicativo, tudo (outras tags) que estiver dentro dessa tag será compilado pelo AngularJS.
 
-	2. ng-controller - Vincula um elemento da VIEW a um CONTROLLER.
+	# ng-controller - Vincula elemento(s) (e seus filhos) da VIEW a um CONTROLLER, cada elemento associado ao seu controller, de onde nasce o $scope mas não é a única forma de haver esse vinculamento, o sistema de roteamento também faz isso (ver mais detalhes). 
 
-	3. ng-bind - substitui o elemento por uma expressão (geralmente do $scope), interpolação de expressão, pega uma "coisa" do $scope e exibe.
+	# ng-bind - substitui o elemento por uma expressão (geralmente do $scope que vem do controller declarado e associado ao componente), junto do ng-model realiza o TWO WAY DATABINDING*. Obs.: A interpolação de expressão ( {{ expressão }} ) para ter o mesmo comportamento: pegar uma "coisa" do $scope e exibir.
 
-	4. ng-repeat - permite a iteração sobre os itens de uma coleção ou de um objeto.
+	# ng-model - vincula uma propriedade ao $scope, entende-se como o inverso do ng-bind, pega uma "coisa" do VIEW e define no $scope, junto com ng-bind realiza o TWO WAY DATABINDING*. Obs.: geralmente aplicado aos INPUT's, SELECT's e nos TEXTAREA's.
 
-	5. ng-model - vincula uma propriedade ao $scope, entende-se como o inverso do ng-bind, pega uma coisa do VIEW e define no $scope. Obs.: geralmente aplicado aos INPUT's, SELECT's e nos TEXTAREA's.
+		* - CICLO DE NOTIFICAÇÃO EMBARCADO NO ANGULAR, EM VIRTUDE DO COMPILAMENTO QUE O FRAMEWORK FAZ NO HTML ISSO ACABA DEFININDO QUAIS DIRETIVAS SERÃO "ESCUTADAS" A TODO TEMPO PARA EXIBIR A INFORMAÇÃO SEMPRE ATUALIZADA.
+
+	# ng-repeat - permite a iteração sobre os itens de uma coleção ou de um objeto, geralmente declarados no controller vindo do $scope, pode ser utilizado de formas bem dinâmicas.
+
+	# ng-click - atribui um comportamendo (função) ao evento click e irmãos do mesmo ex.: double click. Obs.: a função precisa ser declarada pelo $scope do controle utilizado.
+	
+
