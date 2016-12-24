@@ -1,22 +1,31 @@
-Angularjs NOTES
+					Angularjs NOTES
 
+<<<<<<< HEAD
 *******************************************************************************************************************
  						Isso são apenas anotações dos tutorais que tenho visto
+=======
+ 			Isso são apenas anotações dos tutorais que tenho visto
+>>>>>>> origin/master
 
 Um dos principais é o do Rodrigo Branas - https://www.youtube.com/playlist?list=PLQCmSnNFVYnTD5p2fR4EXmtlR6jQJMbPb
 
 ********************************************************************************************************************
 
+<<<<<<< HEAD
 -  Consideraçõs e Detalhes sobre o Angular -
+=======
+				-  Consideraçõs e Detalhes sobre o Angular -
+>>>>>>> origin/master
 
-		---Arquitetura vs Design---
+---Arquitetura vs Design---
 
 - Arquitetura (tecnologia) ex.: Qual Linguagem? Vai usar injeção de dependências? Vai usar Contexto de persistência extendido? Vai usar requisições assíncronas ou vai enviar isso para uma fila?
 
 - Design (Beleza) Ex.: Interações entre objetos, camadas e suas formas de relacionamento coeso.
 
-O Angular usa M(odel) V(iew) C(ontroller) / P(resent) / V(iew)M(odel) / W(hatever)*.
+***********************************************************************************************************************
 
+<<<<<<< HEAD
 * KKKK tretas na definição, pois é uma "questão filosófica".
 
 !!! A importância é a separação de responsabilidades. !!!
@@ -28,11 +37,30 @@ VIEW (DOM) - HTML ou blocos de HTML (componentes de uma SPA - SINGLE PAGE APLICA
 CONTROLLER (SUPORTE DO VIEW) - View e Controller não se conhecem, algum arquivo js que faz a lógica das coisas. ex.: cozinha de um restaurante que só reconhece o pedido e não conhece o cliente mas entrega o prato pronto.
 
 SCOPE (GARÇOM) - Faz ligação, a ponte, a mediação entre o view e controller e rola um caminho duplo de dados do V pro C e vice-versa. ex.: o pedido e o prato.
+=======
+O Angular usa M(odel) V(iew) C(ontroller) / P(resent) / V(iew)M(odel) / W(hatever)*.
 
+* KKKK tretas na definição, pois é uma "questão filosófica".
+
+!!! A importância é a separação de responsabilidades. !!!
+
+-- Eis aqui a composição ---
+
+VIEW (DOM) - HTML ou blocos de HTML (componentes de uma SPA - SINGLE PAGE APLICATTION) obs.: js de leve -inbutido ou não-, talvez animações.
+
+CONTROLLER (SUPORTE DO VIEW) - View e Controller não se conhecem, algum arquivo js que faz a lógica das coisas. ex.: cozinha de um restaurante que só reconhece o pedido e não conhece o cliente mas entrega o prato pronto.
+>>>>>>> origin/master
+
+SCOPE (GARÇOM) - Faz ligação, a ponte, a mediação entre o view e controller e rola um caminho duplo de dados do V pro C e vice-versa. ex.: o pedido e o prato.
 
 -----------------------------------------------------------------------------------------------------------------------
+					** Composição do Angular **
 
+<<<<<<< HEAD
 - Diretivas - são as extensões do HTML que permitem a implementação de novos comportamentos de forma bem declarativa, ou seja, são usadas dentro das tags dos componentes aos quais você quer usar. 
+=======
+- Diretivas - são as extensões do HTML que permitem a implementação de novos comportamentos, ou seja, são usadas dentro das tags dos componentes aos quais você quer usar. 
+>>>>>>> origin/master
 ps.: O angular percorre seu documento a procura dessas diretivas para compilar-las e executar o comportamento delas.
 
 	# ng-app - Fronteiras do seu aplicativo, tudo (outras tags) que estiver dentro dessa tag será compilado pelo AngularJS.
