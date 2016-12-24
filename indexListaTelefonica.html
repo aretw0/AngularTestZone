@@ -18,6 +18,10 @@
 	.form-control {
 		margin-bottom: 5px;
 	}
+	.selecionado {
+		background-color: yellow;
+		font-weight: bold;
+	}
 </style>
 <script src='lib/angular/angular.js'></script>
 <script>
@@ -38,9 +42,17 @@ $scope.app = "Lista Telefonica";
 
 // definindo variável
 $scope.contatos = [
-	{nome: "Pedro", telefone: "999763606"},
-	{nome: "Ana", telefone: "999768456"},
-	{nome: "Maria", telefone: "999739606"},]
+	{nome: "Pedro", telefone: "999763606", cor: "blue"},
+	{nome: "Ana", telefone: "999768456", cor: "red"},
+	{nome: "Maria", telefone: "999739606", cor: "green"}
+];
+
+$scope.operadoras = [
+	{nome: "Oi", codigo: 14, categoria: "Celular"},
+	{nome: "Vivo", codigo: 15, categoria: "Celular"},
+	{nome: "Tim", codigo: 41, categoria: "Celular"},
+	{nome: "Claro", codigo: 91, categoria: "Fixo"}
+];
 
 // definindo função
 $scope.adicionarContato = function(contato) {
@@ -66,16 +78,27 @@ $scope.adicionarContato = function(contato) {
 	
 		Abaixo, opções para isso.			 */
 
-	/* Usar $scope.contatos.push(angular.copy(contato));
-	é uma opção para "desviar" o ciclo do twoway databinding */
-
-	$scope.contatos.push(contato);
+	/* uma opção para "desviar" o ciclo do twoway databinding é usar uma função do objeto angular */
+	$scope.contatos.push(angular.copy(contato));
+	
 	delete $scope.contato; 
-	// Outra opção para quebrar o ciclo deletando o objeto contato
-
+	/*	Outra opção para quebrar o ciclo é
+	$scope.contatos.push(contato);
+	e deletar o objeto contato	*/
 };
 
+$scope.apagarContatos = function (contatos) {
+	$scope.contatos = contatos.filter(function (contato) {
+		if (!contato.selecionado) return contato;
+	});
+	
+};
 
+$scope.isContatoSelecionado = function(contatos) {
+	return contatos.some(function (contato){
+		return contato.selecionado;
+	});
+};
 });
 </script>
 </head>
@@ -86,14 +109,21 @@ $scope.adicionarContato = function(contato) {
 	<h3>{{app}}</h3>
 		
 	<!-- Exemplo de utilização do ng-repeat-->	
-	<table class="table table-striped">
+	<table ng-show="contatos.length > 0" class="table">
 		<tr>
+			<th></th>
 			<th>Nome</th>
 			<th>Telefone</th>
+			<th>Operadora</th>
+			<th></th>
 		</tr>
-		<tr ng-repeat="contato in contatos" >
+		<!-- exemplo de utilização do ng-class -->
+		<tr ng-class="{selecionado: contato.selecionado}" ng-repeat="contato in contatos" >
+			<td><input type="checkbox" ng-model="contato.selecionado"></td>
 			<td>{{contato.nome}}</td>
 			<td>{{contato.telefone}}</td>
+			<td>{{contato.operadora.nome}}</td>
+			<td><div style="width: 20px; height: 20px;" ng-style="{'background-color': contato.cor}"></div></td>
 		</tr>
 	</table>
 	
@@ -121,20 +151,31 @@ $scope.adicionarContato = function(contato) {
 	</table>						-->
 
 	<hr/>
-
 	<!-- O ng-model faz a relação do componente para o $scope e aqui no caso são os valores nome e telefone que automaticamente são usados na expressão abaixo.	-->
-
 	<input class="form-control" type="text" ng-model="contato.nome" placeholder="Nome" />
 	<input class="form-control" type="text" ng-model="contato.telefone" placeholder="Telefone" />
 
 	<!--	{{contato}}
+	Esta utilização do ng-bind/interpolação de expressão e o ng-model é um exemplo de DE TWOWAY DATABINDING. -->
 
-	Esta utilização do ng-bind/interpolação de expressão e o ng-model é um exemplo de DE TWOWAY DATABINDING.	-->
+	<!-- Exemplos de utilização do ng-options, nota-se que precisa do ng-model para pegar o que será selecionado e o ng-options popula o select com opções de algum objeto utilizando uma expressão:
 
-	<!-- Exemplo de utilização do ng-click, a função precisa estar declarada no $scope do controller utilizado-->
-	<button class="btn btn-primary btn-block" ng-click="adicionarContato(contato)">Adicionar Contato</button>
+	ng-options="operadora.nome for operador in operadoras"	
+	ou
+	ng-options="operadora.codigo as operadora.nome for operador in operadoras"
+	ou	 -->
+	<select class="form-control" ng-model="contato.operadora" ng-options="operadora.nome group by operadora.categoria for operadora in operadoras">
+	<option value="">Selecione uma operadora</option>
+	</select>
 
+	<!-- Exemplo de utilização do ng-click, a função precisa estar declarada no $scope do controller utilizado.
+	Exemplo de utilização do ng-disabled, que só desabilita o botão é igual a true	-->
+	<button class="btn btn-primary btn-block" ng-click="adicionarContato(contato)" ng-disabled="!contato.nome || !contato.telefone || !contato.operadora.nome">Adicionar Contato</button>
+	<button class="btn btn-danger btn-block" ng-click="apagarContatos(contatos)" ng-hide="!isContatoSelecionado(contatos)">Apagar Contato</button>
+	
+	<!-- -->
 	
 </div>
+<div ng-include="'listaFooter.html'"></div>
 </body>
 </html>

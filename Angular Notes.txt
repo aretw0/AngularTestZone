@@ -1,52 +1,61 @@
 Angularjs NOTES
 
 *******************************************************************************************************************
- 						Isso s„o apenas anotaÁıes dos tutorais que tenho visto
+ 						Isso s√£o apenas anota√ß√µes dos tutorais que tenho visto
 
-Um dos principais È o do Rodrigo Branas - https://www.youtube.com/playlist?list=PLQCmSnNFVYnTD5p2fR4EXmtlR6jQJMbPb
+Um dos principais √© o do Rodrigo Branas - https://www.youtube.com/playlist?list=PLQCmSnNFVYnTD5p2fR4EXmtlR6jQJMbPb
 
 ********************************************************************************************************************
 
--  ConsideraÁıs e Detalhes sobre o Angular -
+-  Considera√ß√µs e Detalhes sobre o Angular -
 
 		---Arquitetura vs Design---
 
-- Arquitetura (tecnologia) ex.: Qual Linguagem? Vai usar injeÁ„o de dependÍncias? Vai usar Contexto de persistÍncia extendido? Vai usar requisiÁıes assÌncronas ou vai enviar isso para uma fila?
+- Arquitetura (tecnologia) ex.: Qual Linguagem? Vai usar inje√ß√£o de depend√™ncias? Vai usar Contexto de persist√™ncia extendido? Vai usar requisi√ß√µes ass√≠ncronas ou vai enviar isso para uma fila?
 
-- Design (Beleza) Ex.: InteraÁıes entre objetos, camadas e suas formas de relacionamento coeso.
+- Design (Beleza) Ex.: Intera√ß√µes entre objetos, camadas e suas formas de relacionamento coeso.
 
 O Angular usa M(odel) V(iew) C(ontroller) / P(resent) / V(iew)M(odel) / W(hatever)*.
 
-* KKKK tretas na definiÁ„o, pois È uma "quest„o filosÛfica".
+* KKKK tretas na defini√ß√£o, pois √© uma "quest√£o filos√≥fica".
 
-!!! A import‚ncia È a separaÁ„o de responsabilidades. !!!
+!!! A import√¢ncia √© a separa√ß√£o de responsabilidades. !!!
 
--- Eis aqui a composiÁ„o ---
+-- Eis aqui a composi√ß√£o ---
 
-VIEW (DOM) - HTML ou blocos de HTML (componentes de uma SPA - SINGLE PAGE APLICATTION) obs.: js de leve -inbutido ou n„o-, talvez animaÁıes.
+VIEW (DOM) - HTML ou blocos de HTML (componentes de uma SPA - SINGLE PAGE APLICATTION) obs.: js de leve -inbutido ou n√£o-, talvez anima√ß√µes.
 
-CONTROLLER (SUPORTE DO VIEW) - View e Controller n„o se conhecem, algum arquivo js que faz a lÛgica das coisas. ex.: cozinha de um restaurante que sÛ reconhece o pedido e n„o conhece o cliente mas entrega o prato pronto.
+CONTROLLER (SUPORTE DO VIEW) - View e Controller n√£o se conhecem, algum arquivo js que faz a l√≥gica das coisas. ex.: cozinha de um restaurante que s√≥ reconhece o pedido e n√£o conhece o cliente mas entrega o prato pronto.
 
-SCOPE (GAR«OM) - Faz ligaÁ„o, a ponte, a mediaÁ„o entre o view e controller e rola um caminho duplo de dados do V pro C e vice-versa. ex.: o pedido e o prato.
+SCOPE (GAR√áOM) - Faz liga√ß√£o, a ponte, a media√ß√£o entre o view e controller e rola um caminho duplo de dados do V pro C e vice-versa. ex.: o pedido e o prato.
 
 
 -----------------------------------------------------------------------------------------------------------------------
 
-- Diretivas - s„o as extensıes do HTML que permitem a implementaÁ„o de novos comportamentos, ou seja, s„o usadas dentro das tags dos componentes aos quais vocÍ quer usar. 
+- Diretivas - s√£o as extens√µes do HTML que permitem a implementa√ß√£o de novos comportamentos de forma bem declarativa, ou seja, s√£o usadas dentro das tags dos componentes aos quais voc√™ quer usar. 
 ps.: O angular percorre seu documento a procura dessas diretivas para compilar-las e executar o comportamento delas.
 
-	# ng-app - Fronteiras do seu aplicativo, tudo (outras tags) que estiver dentro dessa tag ser· compilado pelo AngularJS.
+	# ng-app - Fronteiras do seu aplicativo, tudo (outras tags) que estiver dentro dessa tag ser√° compilado pelo AngularJS.
 
-	# ng-controller - Vincula elemento(s) (e seus filhos) da VIEW a um CONTROLLER, cada elemento associado ao seu controller, de onde nasce o $scope mas n„o È a ˙nica forma de haver esse vinculamento, o sistema de roteamento tambÈm faz isso (ver mais detalhes). 
+	# ng-controller - Vincula elemento(s) (e seus filhos) da VIEW a um CONTROLLER, cada elemento associado ao seu controller, de onde nasce o $scope mas n√£o √© a √∫nica forma de haver esse vinculamento, o sistema de roteamento tamb√©m faz isso (ver mais detalhes). 
 
-	# ng-bind - substitui o elemento por uma express„o (geralmente do $scope que vem do controller declarado e associado ao componente), junto do ng-model realiza o TWO WAY DATABINDING*. Obs.: A interpolaÁ„o de express„o ( {{ express„o }} ) para ter o mesmo comportamento: pegar uma "coisa" do $scope e exibir.
+	# ng-bind - substitui o elemento por uma express√£o (geralmente do $scope que vem do controller declarado e associado ao componente), junto do ng-model realiza o TWO WAY DATABINDING*. Obs.: A interpola√ß√£o de express√£o ( {{ express√£o }} ) para ter o mesmo comportamento: pegar uma "coisa" do $scope e exibir.
 
 	# ng-model - vincula uma propriedade ao $scope, entende-se como o inverso do ng-bind, pega uma "coisa" do VIEW e define no $scope, junto com ng-bind realiza o TWO WAY DATABINDING*. Obs.: geralmente aplicado aos INPUT's, SELECT's e nos TEXTAREA's.
 
-		* - CICLO DE NOTIFICA«√O EMBARCADO NO ANGULAR, EM VIRTUDE DO COMPILAMENTO QUE O FRAMEWORK FAZ NO HTML ISSO ACABA DEFININDO QUAIS DIRETIVAS SER√O "ESCUTADAS" A TODO TEMPO PARA EXIBIR A INFORMA«√O SEMPRE ATUALIZADA.
+		* - CICLO DE NOTIFICA√á√ÉO EMBARCADO NO ANGULAR, EM VIRTUDE DO COMPILAMENTO QUE O FRAMEWORK FAZ NO HTML ISSO ACABA DEFININDO QUAIS DIRETIVAS SER√ÉO "ESCUTADAS" A TODO TEMPO PARA EXIBIR A INFORMA√á√ÉO SEMPRE ATUALIZADA.
 
-	# ng-repeat - permite a iteraÁ„o sobre os itens de uma coleÁ„o ou de um objeto, geralmente declarados no controller vindo do $scope, pode ser utilizado de formas bem din‚micas.
+	# ng-repeat - permite a itera√ß√£o sobre os itens de uma cole√ß√£o ou de um objeto, geralmente declarados no controller vindo do $scope, pode ser utilizado de formas bem din√¢micas.
 
-	# ng-click - atribui um comportamendo (funÁ„o) ao evento click e irm„os do mesmo ex.: double click. Obs.: a funÁ„o precisa ser declarada pelo $scope do controle utilizado.
+	# ng-click - atribui um comportamendo (fun√ß√£o) ao evento click e irm√£os do mesmo ex.: double click. Obs.: a fun√ß√£o precisa ser declarada pelo $scope do controle utilizado.
 	
+	#ng-disabled - desabilita um elemento (boyt√£o, input) dinamicamente.
 
+	#ng-options - renderiza as op√ß√µes de um select, ou seja, popula o select com op√ß√µes do $scope, melhor op√ß√£o para isso.
+
+	#ng-class e ng-style - aplica classes css e estilos dinamicamente
+
+	# ng-if / ng-show / ng-hide - exibe um elemento condicionalmente.
+		{ng-if mexe diretamente com o DOM retirando/inserindo por completo o dito componente}		
+				{ng-show/hide √© uma alternativa ao ng-disabled, trabalha a visibilidade}
+			
