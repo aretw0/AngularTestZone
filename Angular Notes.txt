@@ -77,13 +77,18 @@ ps.: O angular percorre seu documento a procura dessas diretivas para compilar-l
 
 	# ng-click - atribui um comportamendo (função) ao evento click e irmãos do mesmo ex.: double click. Obs.: a função precisa ser declarada pelo $scope do controle utilizado.
 	
-	#ng-disabled - desabilita um elemento (boytão, input) dinamicamente.
+	# ng-options - renderiza as opções de um select, ou seja, popula o select com opções do $scope, melhor opção para isso.
 
-	#ng-options - renderiza as opções de um select, ou seja, popula o select com opções do $scope, melhor opção para isso.
+	# ng-class e ng-style - aplica classes css e estilos dinamicamente
 
-	#ng-class e ng-style - aplica classes css e estilos dinamicamente
+	# ng-disabled - desabilita um elemento (botão, input) dinamicamente.
 
 	# ng-if / ng-show / ng-hide - exibe um elemento condicionalmente.
-		{ng-if mexe diretamente com o DOM retirando/inserindo por completo o dito componente}		
-				{ng-show/hide é uma alternativa ao ng-disabled, trabalha a visibilidade}
-			
+		
+		* - ng-if mexe diretamente com o DOM retirando/inserindo por completo o componente controlado, já ng-show/hide é uma alternativa ao ng-disabled só que trabalha apenas visibilidade de tal componentes.
+	
+	# ng-required - define um determinado campo como obrigatório. 
+
+		* - Junto a um formulário e a algumas propriedades (como $valid, $invalid, $pristine, $dirty, ng-minlength/maxlength e $error) facilita a validação de formulários e comportamentos a partir disso.
+
+	# ng-pattern - define uma RegExp (expressão regulares ver JS) para validar o campo.

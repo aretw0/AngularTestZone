@@ -1,5 +1,6 @@
 <html ng-app="listaTelefonica">
 <head>
+<meta charset="utf-8">
 <title>Lista Telefonica</title>
 <link rel="stylesheet" type="text/css" href="lib/bootstrap/css/bootstrap.css">
 <style>
@@ -24,81 +25,86 @@
 	}
 </style>
 <script src='lib/angular/angular.js'></script>
+<script src='lib/angular/angular-messages.js'></script>
 <script>
 /* 
 	Definindo modulo da aplicação
 
 	Os colchetes significam o conjunto de módulos que você quer importar, pois o angular permite de uma forma modular fazer a concatenação de componentes com outros módulos.
 
-	Fazendo isso trazemos todos: serviços, diretivas, módulos.
+	Fazendo isso trazemos todos: serviços, diretivas, módulos e etc.
 
  */
-angular.module("listaTelefonica", []);
+angular.module("listaTelefonica", ["ngMessages"]);
 
 // definindo um controller com $scope *utilizado pelo mesmo*
 angular.module("listaTelefonica").controller("listaTelefonicaCtrl", function($scope) {
-//definindo variável
-$scope.app = "Lista Telefonica";
+	//definindo variável
+	$scope.app = "Lista Telefonica";
 
-// definindo variável
-$scope.contatos = [
-	{nome: "Pedro", telefone: "999763606", cor: "blue"},
-	{nome: "Ana", telefone: "999768456", cor: "red"},
-	{nome: "Maria", telefone: "999739606", cor: "green"}
-];
+	// definindo variável
+	$scope.contatos = [
+		{nome: "Pedro", telefone: "999763606", cor: "blue"},
+		{nome: "Ana", telefone: "999768456", cor: "red"},
+		{nome: "Maria", telefone: "999739606", cor: "green"}
+	];
 
-$scope.operadoras = [
-	{nome: "Oi", codigo: 14, categoria: "Celular"},
-	{nome: "Vivo", codigo: 15, categoria: "Celular"},
-	{nome: "Tim", codigo: 41, categoria: "Celular"},
-	{nome: "Claro", codigo: 91, categoria: "Fixo"}
-];
+	$scope.operadoras = [
+		{nome: "Oi", codigo: 14, categoria: "Celular"},
+		{nome: "Vivo", codigo: 15, categoria: "Celular"},
+		{nome: "Tim", codigo: 41, categoria: "Celular"},
+		{nome: "Claro", codigo: 91, categoria: "Fixo"}
+	];
 
-// definindo função
-$scope.adicionarContato = function(contato) {
-	/* Teste se o nome e telefone (ng-model) estão mesmo no $scope
-	console.log("Nome: " + $scope.nome + "\nTelefone: " + $scope.telefone); */
+	// definindo função
+	$scope.adicionarContato = function(contato) {
+		/* Teste se o nome e telefone (ng-model) estão mesmo no $scope
+		console.log("Nome: " + $scope.nome + "\nTelefone: " + $scope.telefone); */
 
-	/* Usando
-	 $scope.contatos.push({nome: $scope.nome  lendo o scope , telefone: $scope.telefone lendo o scope }); 
-	
-	Insere os valores no final do array, ver conceitos de arrays em JS para mais.
-
-		Esta é uma forma RUIM de passar parâmetro pois está quebrando um mantra precioso.
+		/* Usando
+		 $scope.contatos.push({nome: $scope.nome  lendo o scope , telefone: $scope.telefone lendo o scope }); 
 		
-		--- MANTRA --
+		Insere os valores no final do array, ver conceitos de arrays em JS para mais.
 
-		Devemos EVITAR ao máximo ler o $scope estando dentro do controller.
-		Isso acaba deixando as coisas menos claras e gera problemas no futuro de testes unitários.
-	*/
+			Esta é uma forma RUIM de passar parâmetro pois está quebrando um mantra precioso.
+			
+			--- MANTRA --
 
-	/*	Usando	$scope.contatos.push(contato);
-	
-	O twoway databinding vai te fuder, tu precisa lidar com esse ciclo!!
-	
-		Abaixo, opções para isso.			 */
+			Devemos EVITAR ao máximo ler o $scope estando dentro do controller.
+			Isso acaba deixando as coisas menos claras e gera problemas no futuro de testes unitários.
+		*/
 
-	/* uma opção para "desviar" o ciclo do twoway databinding é usar uma função do objeto angular */
-	$scope.contatos.push(angular.copy(contato));
-	
-	delete $scope.contato; 
-	/*	Outra opção para quebrar o ciclo é
-	$scope.contatos.push(contato);
-	e deletar o objeto contato	*/
-};
+		/*	Usando	$scope.contatos.push(contato);
+		
+		O twoway databinding vai te fuder, tu precisa lidar com esse ciclo!!
+		
+			Abaixo, opções para isso.			 */
 
-$scope.apagarContatos = function (contatos) {
-	$scope.contatos = contatos.filter(function (contato) {
-		if (!contato.selecionado) return contato;
-	});
-	
-};
+		/* uma opção para "desviar" o ciclo do twoway databinding é usar uma função do objeto angular */
+		$scope.contatos.push(angular.copy(contato));
+		
+		delete $scope.contato; 
+		/*	Outra opção para quebrar o ciclo é
+		$scope.contatos.push(contato);
+		e deletar o objeto contato	*/
 
-$scope.isContatoSelecionado = function(contatos) {
-	return contatos.some(function (contato){
-		return contato.selecionado;
-	});
-};
+		// voltando a virgindade do formulário
+		$scope.contatoForm.$setPristine();
+
+	};
+
+	$scope.apagarContatos = function (contatos) {
+		$scope.contatos = contatos.filter(function (contato) {
+			if (!contato.selecionado) return contato;
+		});
+		
+	};
+
+	$scope.isContatoSelecionado = function(contatos) {
+		return contatos.some(function (contato){
+			return contato.selecionado;
+		});
+	};
 });
 </script>
 </head>
@@ -151,31 +157,51 @@ $scope.isContatoSelecionado = function(contatos) {
 	</table>						-->
 
 	<hr/>
-	<!-- O ng-model faz a relação do componente para o $scope e aqui no caso são os valores nome e telefone que automaticamente são usados na expressão abaixo.	-->
-	<input class="form-control" type="text" ng-model="contato.nome" placeholder="Nome" />
-	<input class="form-control" type="text" ng-model="contato.telefone" placeholder="Telefone" />
+	<!-- exemplo de utilização de form que no angular facilita a utilização de diretivas de validação como ng-required -->
+	<form name="contatoForm">
+		<!-- O ng-model faz a relação do componente para o $scope e aqui no caso são os valores nome e telefone que automaticamente são usados na expressão abaixo.	-->
+		<input class="form-control" type="text" ng-model="contato.nome" name="nome" placeholder="Nome" ng-required="true" ng-minlength="10"/>
+		<input class="form-control" type="text" ng-model="contato.telefone" name="telefone" placeholder="Telefone" ng-required="true" ng-pattern="/^\d{4,5}-\d{4}$/" />
 
-	<!--	{{contato}}
-	Esta utilização do ng-bind/interpolação de expressão e o ng-model é um exemplo de DE TWOWAY DATABINDING. -->
+		<!--	{{contato}}
+		Esta utilização do ng-bind/interpolação de expressão e o ng-model é um exemplo de DE TWOWAY DATABINDING. -->
 
-	<!-- Exemplos de utilização do ng-options, nota-se que precisa do ng-model para pegar o que será selecionado e o ng-options popula o select com opções de algum objeto utilizando uma expressão:
+		<!-- Exemplos de utilização do ng-options, nota-se que precisa do ng-model para pegar o que será selecionado e o ng-options popula o select com opções de algum objeto utilizando uma expressão:
 
-	ng-options="operadora.nome for operador in operadoras"	
-	ou
-	ng-options="operadora.codigo as operadora.nome for operador in operadoras"
-	ou	 -->
-	<select class="form-control" ng-model="contato.operadora" ng-options="operadora.nome group by operadora.categoria for operadora in operadoras">
-	<option value="">Selecione uma operadora</option>
-	</select>
+		ng-options="operadora.nome for operador in operadoras"	
+		ou
+		ng-options="operadora.codigo as operadora.nome for operador in operadoras"
+		ou	 -->
+		<select class="form-control" ng-model="contato.operadora" ng-options="operadora.nome group by operadora.categoria for operadora in operadoras">
+		<option value="">Selecione uma operadora</option>
+		</select>
+	</form>
+	<!-- Exemplo de utilização da propriedade $error junto do diretiva ng-messages (módulo ngMessage-->
+
+	<div ng-messages="contatoForm.nome.$error" class="alert alert-danger">
+		<div ng-message="required"> 
+			Por favor, preencha o campo nome!
+		</div>
+		<div ng-message="minlength"> 
+			O campo Nome deve ter no mínimo 10 caracateres!
+		</div>		
+	</div>
+
+	<div ng-show="contatoForm.$error.required && contatoForm.telefone.$dirty" class="alert alert-danger"> 
+		Por favor, preencha o campo telefone!
+	</div>
+	<div ng-show="contatoForm.$error.pattern" class="alert alert-danger"> 
+		O campo Telefone deve ter o formato DDDDD-DDDD.
+	</div>
 
 	<!-- Exemplo de utilização do ng-click, a função precisa estar declarada no $scope do controller utilizado.
 	Exemplo de utilização do ng-disabled, que só desabilita o botão é igual a true	-->
-	<button class="btn btn-primary btn-block" ng-click="adicionarContato(contato)" ng-disabled="!contato.nome || !contato.telefone || !contato.operadora.nome">Adicionar Contato</button>
+	<button class="btn btn-primary btn-block" ng-click="adicionarContato(contato)" ng-disabled="contatoForm.$invalid">Adicionar Contato</button>
 	<button class="btn btn-danger btn-block" ng-click="apagarContatos(contatos)" ng-hide="!isContatoSelecionado(contatos)">Apagar Contato</button>
 	
 	<!-- -->
 	
 </div>
-<div ng-include="'listaFooter.html'"></div>
+<div ng-include="'footerListaTelefonica.html'"></div>
 </body>
 </html>
