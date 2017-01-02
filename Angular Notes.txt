@@ -71,6 +71,8 @@ ps.: O angular percorre seu documento a procura dessas diretivas para compilar-l
 	# uppercase, lowercase, date, filter, orderBy, currency, number, limitTo
 	(Alguns podem ser utilizado com a localização certa)
 
+- Criação de filtros - 
+
 ---------------------------------------------------------------------------------------------------
 
 - Integrando com back-end -
@@ -89,3 +91,74 @@ ps.: O angular percorre seu documento a procura dessas diretivas para compilar-l
 	# JSONP (Padding) - primeira solução que apareceu, funciona em cima da tag script que não sofre com essas políticas.
 
 	# CORS (Cross-Origin Resource Sharing) - mas avançado e mais recente, adição de cabeçalhos http autorizando esse tipo de requisição.
+
+-----------------------------------------------------------------------------------------------------
+
+- Organizando seu projeto - Formas de organizar seu código.
+
+	# Inline style - tudo dentro do mesmo arquivo, projetos pequenos e simples pra aprender.
+		> app/
+			> index.html
+			> angular.js
+
+	# Stereotyped style - os componentes do mesmo tipo juntos, projetos pequenos, poucos componentes, pouco código, domínio único.
+		> app/
+			> css ou style/
+				> app.css
+			> js/
+				> app.js
+				> controllers.js
+				> directives.js
+				> filters.js
+			> lib/
+				> angular.js
+			> view/
+				> login.html
+				> lista.html
+			> index.html
+
+	# Specific style - um arquivo para cada componente, projetos médios, muitos componentes, número de linhas em cada arquivo já começa a incomodar, domínimo relativamente extenso.
+		> app/
+			> css ou style/
+				> app.css
+			> js/
+				> controllers/
+					> loginCtrl.js
+					> listaCtrl.js
+				> directives/
+					> panelDirective.js
+					> tableDirective.js
+				> services/
+					> loginService.js
+					> listaService.js
+				> app.js
+			> lib/
+				> angular.js
+			> view/
+				> login.html
+				> lista.html
+			> index.html
+
+	# Domain style - agrupando os arquivos por domínio, para projetos modularizados, projetos maiores.
+
+----------------------------------------------------------------------------------------------------------
+
+- Criando serviços - devemos criar serviços por que facilita:
+	
+	# Reuso de código.
+	# Organização, componentes enxutos.
+	# Testes, isolando dentro de um serviço.
+
+	Um serviço é um singleton, ou seja, um objeto único, criado na inicialização da aplicação e que está disponível para ser injetado em outros componentes.
+
+		Exemplos: 
+
+			# Factory / Service -  pra exemplicar esses serviços podemos extrair uma parte do controller como a parte que interage com a api para eles.
+
+			# Value / Constant - registros de objetos para configuração de sua aplicação, como a url e porta da sua API. Obs.: só o constant pode ser injetado no provider.
+
+			# Provider - é o serviço que da a origem a todos os outros, mais complexo mas também mais configurável.
+				Config - configuraçao do tipo provider
+
+
+			
