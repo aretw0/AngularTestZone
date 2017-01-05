@@ -12,7 +12,7 @@ angular.module("listaTelefonica").controller("listaTelefonicaCtrl", function($sc
 		contatosAPI.getContatos().success(function (data) {
 			$scope.contatos = data;
 		}).error(function (data, status) {
-			$scope.message = "Aconteceu um problema: " + data;
+			$scope.error = "Não foi possível encontrar os dados.";
 		});
 	};
 	var carregarOperadoras = function () {
