@@ -19,12 +19,23 @@
 <script src='js/filters/ellipsisFilter.js'></script>
 <script src='js/directives/uiAlertDirective.js'></script>
 <script src='js/directives/uiDateDirective.js'></script>
+<script src='js/directives/uiAccordionDirective.js'></script>
 </head>
 <body ng-controller="listaTelefonicaCtrl">
 <div class="jumbotron">
 	
+	<ui-accordions>
+		<ui-accordion title="Accordion 1">
+		Ai aiaiaiaiaia papapai
+		</ui-accordion>
+
+		<ui-accordion title="Accordion 2">
+		aaiaiaiaia mamâe
+		</ui-accordion>
+	</ui-accordions>
+
 	<!--<h3 ng-bind="app"></h3> ou com interpolação de expressão (abaixo) -->
-	<h3>{{app}}</h3>
+	<!--<h3>{{app}}</h3>-->
 	
 	<!--<ui-alert title="Ops, aconteceu um problema!" message="error">
 		{{error}}
