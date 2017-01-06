@@ -2,10 +2,7 @@
 angular.module("listaTelefonica").controller("listaTelefonicaCtrl", function($scope, contatosAPI, operadorasAPI, serialGenerator) {
 	//definindo variável
 	$scope.app = "Lista Telefonica";
-
-	// definindo variável
 	$scope.contatos = [];
-
 	$scope.operadoras = [];
 
 	var carregarContatos = function () {
