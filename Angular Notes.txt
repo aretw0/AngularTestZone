@@ -160,5 +160,9 @@ ps.: O angular percorre seu documento a procura dessas diretivas para compilar-l
 			# Provider - é o serviço que da a origem a todos os outros, mais complexo mas também mais configurável.
 				Config - configuraçao do tipo provider
 
+------------------------------------------------------------------------------------------------------------
 
+- SPA - Single Page Application é uma aplicação que realiza suas transições dentro de uma mesma página, carregando seus componentes de forma dinâmica utilizando AJAX.
+
+	# O Angular JS dispõe do módulo ngRoute e este fornece serviços para realizar o roteamento de páginas.
 			

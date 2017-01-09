@@ -1,0 +1,68 @@
+<div class="jumbotron">
+	
+	<ui-accordions>
+		<ui-accordion title="Accordion 1">
+		Ai aiaiaiaiaia papapai
+		</ui-accordion>
+
+		<ui-accordion title="Accordion 2">
+		aaiaiaiaia mamâe
+		</ui-accordion>
+	</ui-accordions>
+
+	<!--<h3 ng-bind="app"></h3> ou com interpolação de expressão (abaixo) -->
+	<!--<h3>{{app}}</h3>-->
+	
+	<!--<ui-alert title="Ops, aconteceu um problema!" message="error">
+		{{error}}
+	</ui-alert>
+	-->
+	<input class="form-control" type="text" ng-model="criterioBusca" placeholder="O que você está buscando?">
+	<!-- Exemplo de utilização do ng-repeat-->	
+	<table ng-show="contatos.length > 0" class="table table-striped">
+		<tr>
+			<th></th>
+			<th>Serial</th>
+			<th><a href="" ng-click="ordenarPor('nome')">Nome</th>
+			<th><a href="" ng-click="ordenarPor('telefone')">Telefone</th>
+			<th><a href="" ng-click="ordenarPor('operadora')">Operadora</th>
+			<th><a href="" ng-click="ordenarPor('data')">Data</th>
+		</tr>
+		<!-- exemplo de utilização do ng-class -->
+		<tr ng-class="{selecionado: contato.selecionado}" ng-repeat="contato in contatos | filter:criterioBusca | orderBy:criterioDeOrdenacao:direcaoDaOrdenacao" >
+			<td><input type="checkbox" ng-model="contato.selecionado"></td>
+			<td>{{contato.serial}}</td>
+			<td>{{contato.nome | name | ellipsis:15}}</td>
+			<td>{{contato.telefone}}</td>
+			<td>{{contato.operadora.nome}}</td>
+			<td>{{contato.data | date:'dd/mm/yyyy hh:mm'}}</td>
+		</tr>
+	</table>
+	
+	<!--
+	- Outros exemplos:
+				
+	<table class="table table-striped">
+		<tr>
+			<th>Nome</th>
+			<th>Telefone</th>
+		</tr>
+		<tr ng-repeat="contato in contatos" >
+			<td ng-repeat="(key,value) in contato">{{value}}</td>
+		</tr>
+	</table>
+				ou
+
+	<table class="table table-striped" ng-repeat="contato in contatos" >
+		<tr>
+			<th ng-repeat="(key, value) in contato">{{key}}</th>
+		</tr>
+		<tr>
+			<td ng-repeat="(key, value) in contato">{{value}}</td>
+		</tr>
+	</table>						-->
+
+	<hr/>
+	<a class="btn btn-primary btn-block" href="#/novoContato">Novo Contato</a>
+	<button class="btn btn-danger btn-block" ng-click="apagarContatos(contatos)" ng-hide="!isContatoSelecionado(contatos)">Apagar Contato</button>
+</div>

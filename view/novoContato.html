@@ -1,0 +1,44 @@
+<div class="jumbotron">
+<!-- exemplo de utilização de form que no angular facilita a utilização de diretivas de validação como ng-required -->
+	<form name="contatoForm">
+		<!-- O ng-model faz a relação do componente para o $scope e aqui no caso são os valores nome e telefone que automaticamente são usados na expressão abaixo.	-->
+		<input class="form-control" type="text" ng-model="contato.nome" name="nome" placeholder="Nome" ng-required="true" ng-minlength="10"/>
+		<input class="form-control" type="text" ng-model="contato.telefone" name="telefone" placeholder="Telefone" ng-required="true" ng-pattern="/^\d{4,5}-\d{4}$/" />
+		<!--	{{contato}}
+		Esta utilização do ng-bind/interpolação de expressão e o ng-model é um exemplo de DE TWOWAY DATABINDING. -->
+		<input class="form-control" type="text" ng-model="contato.data" name="data" placeholder="Data" ui-date/>
+
+		<!-- Exemplos de utilização do ng-options, nota-se que precisa do ng-model para pegar o que será selecionado e o ng-options popula o select com opções de algum objeto utilizando uma expressão:
+
+		ng-options="operadora.nome for operador in operadoras"	
+		ou
+		ng-options="operadora.codigo as operadora.nome for operador in operadoras"
+		ou	 -->
+		<select class="form-control" ng-model="contato.operadora" ng-options="operadora.nome + '( ' + (operadora.preco | currency) + ' )' group by operadora.categoria for operadora in operadoras | orderBy:'nome'">
+		<option value="">Selecione uma operadora</option>
+		</select>
+	</form>
+	<!-- Exemplo de utilização da propriedade $error junto do diretiva ng-messages (módulo ngMessage-->
+
+	<div ng-messages="contatoForm.nome.$error" ng-show="contatoForm.nome.$dirty" >
+		<div ng-message="required" class="alert alert-danger"> 
+			Por favor, preencha o campo nome!
+		</div>
+		<div ng-message="minlength" class="alert alert-danger"> 
+			O campo Nome deve ter no mínimo 10 caracateres!
+		</div>		
+	</div>
+
+	<div ng-show="contatoForm.$error.required && contatoForm.telefone.$dirty" class="alert alert-danger"> 
+		Por favor, preencha o campo telefone!
+	</div>
+	<div ng-show="contatoForm.$error.pattern" class="alert alert-danger"> 
+		O campo Telefone deve ter o formato DDDDD-DDDD.
+	</div>
+
+	<!-- Exemplo de utilização do ng-click, a função precisa estar declarada no $scope do controller utilizado.
+	Exemplo de utilização do ng-disabled, que só desabilita o botão é igual a true	-->
+	<button class="btn btn-primary btn-block" ng-click="adicionarContato(contato)" ng-disabled="contatoForm.$invalid">Adicionar Contato</button>
+
+	<!-- -->
+</div>
