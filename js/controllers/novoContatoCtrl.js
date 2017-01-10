@@ -1,11 +1,7 @@
 // definindo um controller com $scope *utilizado pelo mesmo*
-angular.module("listaTelefonica").controller("novoContatoCtrl", function($scope, contatosAPI, operadorasAPI, serialGenerator, $location) {
-
-	var carregarOperadoras = function () {
-		operadorasAPI.getOperadoras().success(function (data) {
-			$scope.operadoras = data;
-		});
-	};
+angular.module("listaTelefonica").controller("novoContatoCtrl", function($scope, contatosAPI, operadoras, serialGenerator, $location) {
+	
+	$scope.operadoras = operadoras.data;
 
 	// definindo função
 	$scope.adicionarContato = function(contato) {
@@ -46,6 +42,4 @@ angular.module("listaTelefonica").controller("novoContatoCtrl", function($scope,
 		$scope.contatos.push(contato);
 		e deletar o objeto contato	*/
 	};
-
-	carregarOperadoras();
 });

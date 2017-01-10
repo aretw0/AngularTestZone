@@ -5,9 +5,9 @@ app.use(express.static(__dirname + '/public'));
 app.use(express.bodyParser());
 
 var contatos = [
-  {nome: "bruno da SILVA", telefone: "9999-2222", data: new Date(), operadora: {nome: "Oi", codigo: 14, categoria: "Celular"}},
-  {nome: "sandra MARIA oliveira", telefone: "9999-3333", data: new Date(), operadora: {nome: "Vivo", codigo: 15, categoria: "Celular"}},
-  {nome: "mariana machado bArroso", telefone: "9999-9999", data: new Date(), operadora: {nome: "Tim", codigo: 41, categoria: "Celular"}}
+  {id: 1, nome: "bruno da SILVA", telefone: "9999-2222", data: new Date(), operadora: {nome: "Oi", codigo: 14, categoria: "Celular"}},
+  {id: 2, nome: "sandra MARIA oliveira", telefone: "9999-3333", data: new Date(), operadora: {nome: "Vivo", codigo: 15, categoria: "Celular"}},
+  {id: 3, nome: "mariana machado bArroso", telefone: "9999-9999", data: new Date(), operadora: {nome: "Tim", codigo: 41, categoria: "Celular"}}
 ];
 
 var operadoras = [
@@ -29,6 +29,16 @@ app.all('*', function(req, res, next) {
 
 app.get('/contatos', function(req, res) {
   res.json(contatos);
+});
+app.get('/contatos/2', function(req, res) {
+  res.json(contatos[1]);
+});
+app.get('/contatos/3', function(req, res) {
+  res.json(contatos[2]);
+});
+
+app.get('/contatos/1', function(req, res) {
+  res.json(contatos[0]);
 });
 
 app.post('/contatos', function(req, res) {
